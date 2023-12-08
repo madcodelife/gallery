@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  gallery:
+    build:
+      context: .
+    container_name: 'gallery'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.gallery.rule=Host(`madcodelife.me`)'
+      - 'traefik.http.routers.gallery.entrypoints=websecure'
+      - 'traefik.http.routers.gallery.tls.certresolver=myresolver'
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true
